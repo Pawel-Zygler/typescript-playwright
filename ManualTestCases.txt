@@ -1,0 +1,87 @@
+1. Feature: Login and authentication
+
+Scenario: Logging in as a standard user
+Given a standard user is on the login page
+When the user enters "standard_user" and "secret_sauce"
+Then the user is redirected to the dashboard 
+Then sees a product header loaded within one second
+
+Scenario: Logging in as a locked out user
+Given a locked out user is on the login page
+When the locked user enters "locked_out_user" and "secret_sauce"
+Then the user receives a message about the account being locked
+
+Scenario: Logging in as a performance glitch user
+Given a performance glitch user is on the login page
+When the glitched user enters "performance_glitch_user" and "secret_sauce"
+Then the page loads on time
+
+
+
+2. Feature: Shopping Cart Functionality and Checkout
+
+Scenario: Adding a single product to cart from all products page
+Given user is on all products page
+When user clicks a product
+Then the cart icon updates with number icon
+Then the product is added to cart
+
+Scenario: All items can be added to cart from all products page
+Given user is on all products page
+When clicks add to cart button for all products
+Then all products are added correctly
+
+Scenario: Removing a product from cart
+Given user added a product to cart
+When user removes the product
+Then the cart becomes empty
+
+Scenario: Adding a product to cart from single product page
+Given user is on a single product page
+When user adds the product to cart
+Then the product is added to cart
+
+Scenario: Removing a product from cart from single product page
+Given user added a product to cart from single product page
+When user removes the product
+Then the cart becomes empty
+
+Scenario: Back button to all products works as expected
+Given user is on single product page
+When user clicks Back
+Then goes back to all products
+
+Scenario: Complete checkout e2e
+Given user logs in correctly
+When user added a product to cart
+When clicks Checkout
+When submits personal data
+When clicks Finish
+Then the order success screen is displayed
+
+
+//check for the 00.0000 after .
+Scenario: Product price is correct at checkout
+Given the user added a product
+When reaches checkout summary step
+Then the price is right
+
+Scenario: Update checkout
+Given user adds a product to checkout
+When goes back to all products
+When sorts all products differently to actual state
+When adds second product to cart
+When goes to back to cart
+Then the price is right
+
+
+3. Feature: Product Browsing and Selection
+
+Scenario: All items can be browsed
+Given user is on all products page
+When user clicks a product
+Then user sees single product page for that product
+
+
+
+Scenario: All items can be removed from cart

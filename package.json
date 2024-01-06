@@ -1,0 +1,26 @@
+{
+  "name": "cucumber-playwright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js test",
+    "playwright": "npx playwright test",
+    "test worker": "npx playwright test --workers 3",
+    "to run specific test": "npx playwright test tests/logintwo.spec.js",
+    "to run specific two tests": "npx playwright test loginone.spec.js logintwo.spec.js",
+    "to run by name": "npx playwright test -g 'a standard user is on the login page'",
+    "to run chrome": "npx playwright test --project=chromium",
+    "to run headed": "npx playwright test --headed",
+    "to run debug": "npx playwright test --debug"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.1.0",
+    "@playwright/test": "^1.40.1",
+    "@types/node": "^20.10.6",
+    "ts-node": "^10.9.2"
+  }
+}
