@@ -1,21 +1,29 @@
-import { Given, When, Then } from "@cucumber/cucumber";
-import { chromium, Browser, Page, expect } from "@playwright/test";
+import { Given, When, Then, BeforeAll, AfterAll } from "@cucumber/cucumber";
+import { expect, Browser, Page, chromium } from "@playwright/test";
+//import { globals } from "../../../types/globals";
 
 let browser: Browser;
 let page: Page;
 
-Given("a user is on the login page", async function () {
-  browser = await chromium.launch({ headless: false });
+BeforeAll(async function () {
+  browser = await chromium.launch();
   page = await browser.newPage();
+});
+
+AfterAll(async function () {
+  await browser.close();
+});
+
+Given("a user is on the login page", async function () {
   await page.goto("https://www.saucedemo.com/");
 });
 
-When("enters {string} annd {string}", async function (string, string2) {
-  await page.fill("#user-name", string);
-  await page.fill("#password", string2);
+When("enters {string} and {string}", async function (username, password) {
+  await page.fill("#user-name", username);
+  await page.fill("#password", password);
   await page.click("#login-button");
 });
 
 Then("the user is redirected to the dashboard", async function () {
-  expect(page).toHaveTitle("Swag Labs");
+  await expect(page).toHaveTitle("Swag Labs");
 });

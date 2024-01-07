@@ -2,7 +2,7 @@
 
 ### Setup:
 
-1. Clone repo
+1. git clone https://github.com/Pawel-Zygler/cucumber-playwright.git
 2. Open in the IDE
 3. `npm i` to install the dependencies
 4. `npx playwright install` to install the browsers
