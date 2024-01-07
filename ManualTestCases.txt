@@ -1,78 +1,120 @@
+<UserType>
+standard_user
+locked_out_user
+problem_user
+performance_glitch_user
+error_user
+visual_user
+
+<password>
+secret_sauce
+
 1. Feature: Login and authentication
 
-Scenario: Logging in as a standard user
-Given a standard user is on the login page
-When the user enters "standard_user" and "secret_sauce"
-Then the user is redirected to the dashboard 
-Then sees a product header loaded within one second
+Background: happy path
 
-Scenario: Logging in as a locked out user
-Given a locked out user is on the login page
-When the locked user enters "locked_out_user" and "secret_sauce"
-Then the user receives a message about the account being locked
+Scenario: Log in
+Given a "<UserType>" is on the login page
+When enters "<password>"
+Then the user is redirected to the dashboard
 
-Scenario: Logging in as a performance glitch user
-Given a performance glitch user is on the login page
-When the glitched user enters "performance_glitch_user" and "secret_sauce"
-Then the page loads on time
+Scenario: Log out
+Given a "<UserType>" is logged in
+When clicks hamburger menu and logout button
+Then the user is logged out to login page
 
 
+Background: error handling
+
+Scenario: Log in as locked_out_user
+Given a locked_out_user is on the login page
+When enters <password>
+Then "Sorry, this user has been locked out." error is displayed
+
+Scenario: Log in as performance_glitch_user
+Given a performance_glitch_user is on the login page
+When enters "<password>"
+Then the user is redirected to the dashboard below 
 
 2. Feature: Shopping Cart Functionality and Checkout
 
-Scenario: Adding a single product to cart from all products page
-Given user is on all products page
-When user clicks a product
-Then the cart icon updates with number icon
-Then the product is added to cart
-
-Scenario: All items can be added to cart from all products page
-Given user is on all products page
-When clicks add to cart button for all products
-Then all products are added correctly
-
-Scenario: Removing a product from cart
-Given user added a product to cart
-When user removes the product
-Then the cart becomes empty
-
-Scenario: Adding a product to cart from single product page
-Given user is on a single product page
-When user adds the product to cart
-Then the product is added to cart
-
-Scenario: Removing a product from cart from single product page
-Given user added a product to cart from single product page
-When user removes the product
-Then the cart becomes empty
-
-Scenario: Back button to all products works as expected
-Given user is on single product page
-When user clicks Back
-Then goes back to all products
-
-Scenario: Complete checkout e2e
-Given user logs in correctly
-When user added a product to cart
-When clicks Checkout
-When submits personal data
+Scenario: Complete checkout e2e (as all users beside locked out user)
+Given <UserType> is on all products page
+When added a product to cart
+When goes to cart
+Then should see Your Cart title with selected product
+When clicks Checkout should see checkout: your information form
+When submits personal data correctly by clicking Continue
+Then should see checkout overview page with selected product
+Then should see item prices are correct using price verification method
 When clicks Finish
 Then the order success screen is displayed
 
 
-//check for the 00.0000 after .
-Scenario: Product price is correct at checkout
-Given the user added a product
-When reaches checkout summary step
-Then the price is right
+Scenario: Update the cart
+Given the user is in checkout overview
+When goes back to all products
+When adds another product
+When goes back to checkout overview
+Then the cart updates with additional product
+Then the items total price is right using price verification method
 
-Scenario: Update checkout
-Given user adds a product to checkout
+
+Scenario: Update cart and use sorting functionality on all users
+Given <UserType> is in checkout overview with products
+Then the amounts are right
 When goes back to all products
 When sorts all products differently to actual state
-When adds second product to cart
-When goes to back to cart
-Then the price is right
+When adds more products to cart
+When goes to back to checkout overview
+Then the amounts are still right after update
+
+
+Scenario: Adding a single product to cart from all products page on all users
+Given <UserType> is on all products page
+When clicks add to cart button on a product
+Then the cart icon updates with correct number
+When user clicks cart icon
+Then the product is added to the cart
+
+
+Scenario: Adding a product to cart from single product page
+Given <UserType> is on a single product page
+When clicks add product to cart
+Then the product is added to cart
+
+
+Scenario: All items can be added to cart from all products page on all users
+Given <UserType> is on all products page
+When clicks add to cart button for all products one by one
+Then all products are added to cart
+
+
+Scenario: Removing a product from cart on all users
+Given <UserType> added a product to cart
+When goes to cart
+When removes the product
+Then the cart becomes empty
+Then the badge icon disappears from cart icon
+
+
+Scenario: Removing a product from cart from single product page
+Given user is on a single product page with product added to cart
+When user removes the product
+Then the cart becomes empty
+
+
+Scenario: Back button to all products works as expected
+Given user is on single product page one by one
+When clicks Back one by one
+Then always goes back to all products
+
+
+//for this one, verify the issue with 00.0000 - decimal places
+Scenario: Product price, tax and total is correct at checkout
+Given the user added a product
+When reaches checkout summary step
+Then the amounts are right using price verification method
 
 
 3. Feature: Product Browsing and Selection
@@ -83,5 +125,67 @@ When user clicks a product
 Then user sees single product page for that product
 
 
+Scenario: All items have correct titles, descriptions and price
+Given user is on all products page
+When checks for title, description and price on all products one by one
+When clicks all products one by one
+Then the title, description and prices are consistently accurate across all products
 
-Scenario: All items can be removed from cart
+
+Scenario: All items have correct images
+Given user is on all products page
+When checks for images on the products
+Then the images are correct
+
+
+Scenario: Sorting on all users
+Given <UserType> is on all products page
+When he sorts name a to z
+Then items are sortec a to z
+When sorts z to a
+Then items are sorted z to a
+When sorts by price low to high
+Then items are sorted low to high
+When sorts by price high to low
+Then items are sorted high to low
+
+
+Scenario: Button states are porsisted between pages
+Given user is on all products page
+When adds to cart a product
+When clicks that product
+Then the add to cart button has 'remove' state visible
+When user goes back to all products page
+Then the button also has 'remove' state persisted
+
+
+4. Feature: Contacts
+
+Scenario: Social media buttons in footer
+Given the user is on home page
+When clicks footer social media icon
+Then is redirected accordingly to the correct social media page
+
+Scenario: About section in sidemenu
+Given <UserType> is on all items page and clicks hamburger menu
+When clicks About
+Then is redirected to About section
+
+
+5. Feature: UI/UX
+
+Background: in assertions check for hamburger menu, all products page, cart, sorting, single product, checkout steps, order complete screen
+
+Scenerio: Buttons, menus are graphically correct on all users
+Given the <UserType> is on products page
+When he sees all items page
+Then UI is graphically correct according to design specifications
+
+Scenario: Continue Shopping button
+Given the <UserType> is in cart with a product
+When clicks Continue Shopping button
+Then is redirected to all items page
+When adds all items to cart
+When goes to cart
+When clicks Continue Shopping button
+Then is redirceted to all items page
