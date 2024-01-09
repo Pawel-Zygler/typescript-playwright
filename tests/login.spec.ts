@@ -21,7 +21,7 @@ test.describe("Login", () => {
     await expect(loginPage.productsLabel).toHaveText("Products");
   });
 
-  test("does not le log in", async ({ loginPage }) => {
+  test("does not let log in", async ({ loginPage }) => {
     await loginPage.fillInForm(
       testData.userLocked.username,
       testData.userLocked.password

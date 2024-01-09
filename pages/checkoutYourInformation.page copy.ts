@@ -1,8 +1,7 @@
 import { Page, Locator } from "@playwright/test";
 
-export class CheckoutPage {
+export class CheckoutYourInformationPage {
   page: Page;
-  pageTitle: Locator;
   firstName: Locator;
   lastName: Locator;
   zipCode: Locator;
@@ -10,7 +9,6 @@ export class CheckoutPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.pageTitle = page.locator(".subheader");
     this.firstName = page.locator("#first-name");
     this.lastName = page.locator("#last-name");
     this.zipCode = page.locator("#postal-code");
@@ -27,3 +25,5 @@ export class CheckoutPage {
     await this.zipCode.fill(zipCode);
   }
 }
+
+export default CheckoutYourInformationPage;
