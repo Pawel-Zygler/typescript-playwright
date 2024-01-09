@@ -1,14 +1,3 @@
-<UserType>
-standard_user
-locked_out_user
-problem_user
-performance_glitch_user
-error_user
-visual_user
-
-<password>
-secret_sauce
-
 1. Feature: Login and authentication
 
 Background: happy path
@@ -35,6 +24,14 @@ Scenario: Log in as performance_glitch_user
 Given a performance_glitch_user is on the login page
 When enters "<password>"
 Then the user is redirected to the dashboard below 
+
+Examples: 
+| UserType                  | password       |
+| standard_user         | secret_sauce   |
+| problem_user          | secret_sauce   |
+| performance_glitch_user | secret_sauce |
+| error_user            | secret_sauce   |
+| visual_user           | secret_sauce   |
 
 2. Feature: Shopping Cart Functionality and Checkout
 
