@@ -1,4 +1,4 @@
-# typescript-playwright
+# typescript-playwright project
 
 ### Setup:
 
