@@ -4,7 +4,7 @@ import testData from "../data/testData";
 import { faker } from "@faker-js/faker";
 
 test.describe("Checkout", () => {
-  test("completes checkout", async ({
+  test("@regression completes checkout", async ({
     productsPage,
     loginPage,
     cartPage,

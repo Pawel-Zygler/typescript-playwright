@@ -7,11 +7,11 @@ test.describe("Login", () => {
     await loginPage.visit();
   });
 
-  test("goes to login page", async ({ loginPage, page }) => {
+  test("@smoke goes to login page", async ({ loginPage, page }) => {
     await expect(page).toHaveTitle("Swag Labs");
   });
 
-  test("logs standard user in", async ({ loginPage }) => {
+  test("@smoke logs standard user in", async ({ loginPage }) => {
     await loginPage.fillInForm(
       testData.userStandard.username,
       testData.userStandard.password
@@ -21,7 +21,7 @@ test.describe("Login", () => {
     await expect(loginPage.productsLabel).toHaveText("Products");
   });
 
-  test("does not let log in", async ({ loginPage }) => {
+  test("@smoke does not let log in", async ({ loginPage }) => {
     await loginPage.fillInForm(
       testData.userLocked.username,
       testData.userLocked.password
