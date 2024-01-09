@@ -16,7 +16,7 @@ test.describe("Login", () => {
       testData.userStandard.username,
       testData.userStandard.password
     );
-    await console.log(`heheheh` + loginPage.productsLabel);
+
     await expect(loginPage.productsLabel).toBeVisible();
     await expect(loginPage.productsLabel).toHaveText("Products");
   });
@@ -26,7 +26,7 @@ test.describe("Login", () => {
       testData.userLocked.username,
       testData.userLocked.password
     );
-    await console.log(`heheheh` + loginPage.productsLabel);
+
     await expect(loginPage.errorMessage).toBeVisible();
     await expect(loginPage.errorMessage).toHaveText(
       "Epic sadface: Sorry, this user has been locked out."
