@@ -13,7 +13,8 @@ export class LoginPage {
     this.userName = page.locator("#user-name");
     this.password = page.locator("#password");
     this.loginBtn = page.locator("#login-button");
-    this.productsLabel = page.locator(".product_label");
+    this.productsLabel = page.getByText("Products");
+    this.errorMessage = page.locator('[data-test="error"]');
   }
 
   async visit() {

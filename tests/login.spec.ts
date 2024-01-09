@@ -21,5 +21,15 @@ test.describe("Login", () => {
     await expect(loginPage.productsLabel).toHaveText("Products");
   });
 
-  test("does not le log in", async ({ page }) => {});
+  test("does not le log in", async ({ loginPage }) => {
+    await loginPage.fillInForm(
+      testData.userLocked.username,
+      testData.userLocked.password
+    );
+    await console.log(`heheheh` + loginPage.productsLabel);
+    await expect(loginPage.errorMessage).toBeVisible();
+    await expect(loginPage.errorMessage).toHaveText(
+      "Epic sadface: Sorry, this user has been locked out."
+    );
+  });
 });
