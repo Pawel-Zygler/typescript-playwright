@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js test",
-    "playwright": "npx playwright test",
+    "test": "npx playwright test",
     "test worker": "npx playwright test --workers 3",
     "to run specific test": "npx playwright test tests/logintwo.spec.js",
     "to run specific two tests": "npx playwright test loginone.spec.js logintwo.spec.js",
