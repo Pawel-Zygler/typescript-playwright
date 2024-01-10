@@ -1,9 +1,16 @@
 import { Page, Locator, expect } from "@playwright/test";
 import ProductPage from "./product.page";
+import CartPage from "./cart.page";
+import CheckoutOverviewPage from "./checkoutOverview.page";
+import CheckoutYourInformationPage from "./checkoutYourInformation.page copy";
+import { faker } from "@faker-js/faker";
 
 export class ProductsPage {
   page: Page;
   productPage: ProductPage;
+  checkoutYourInformationPage: CheckoutYourInformationPage;
+  checkoutOverviewPage: CheckoutOverviewPage;
+  cartPage: CartPage;
   products: Locator;
   sortDropdown: Locator;
   cartIcon: Locator;
@@ -15,6 +22,9 @@ export class ProductsPage {
   constructor(page: Page) {
     this.page = page;
     this.productPage = new ProductPage(page);
+    this.cartPage = new CartPage(page);
+    this.checkoutYourInformationPage = new CheckoutYourInformationPage(page);
+    this.checkoutOverviewPage = new CheckoutOverviewPage(page);
     this.products = page.locator(".inventory_item_name");
     this.productDescription = page.locator(".inventory_item_desc");
     this.sortDropdown = page.locator(".product_sort_container");
@@ -104,7 +114,7 @@ export class ProductsPage {
     }
   }
 
-  //for checkout summary
+  // for checkout summary
   // async getPrice(): Promise<number> {
   //   const productPricesUnformatted = await this.itemCost.allTextContents();
   //   const itemPrices = productPricesUnformatted.map((item) => {
@@ -119,6 +129,20 @@ export class ProductsPage {
   //   }
   //   return result;
   // }
+
+  async addProductToCheckout(product: string) {
+    await this.clickProduct(product);
+    await this.productPage.addToCartBtn.click();
+    await this.cart.click();
+    await this.cartPage.checkoutBtn.click();
+    await this.checkoutYourInformationPage.fillInPersonalInfo(
+      faker.person.firstName(),
+      faker.person.lastName(),
+      faker.location.zipCode()
+    );
+    await this.checkoutYourInformationPage.continueBtn.click();
+    await expect(this.checkoutOverviewPage.pageTitle).toHaveText("Checkout: Overview");
+  }
 }
 
 export default ProductsPage;

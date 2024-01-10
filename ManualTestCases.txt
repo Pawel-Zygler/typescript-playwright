@@ -1,6 +1,6 @@
 1. Feature: Login and authentication
 
-Background: happy path
+Background: happy path (all users)
 
 Scenario: Log in
 Given a "<UserType>" is on the login page
@@ -33,7 +33,7 @@ Examples:
 | error_user            | secret_sauce   |
 | visual_user           | secret_sauce   |
 
-2. Feature: Shopping Cart Functionality and Checkout
+2. Feature: Shopping Cart Functionality and Checkout (all users beside locked)
 
 Scenario: Complete checkout e2e (as all users beside locked out user)
 Given <UserType> is on all products page
@@ -43,31 +43,30 @@ Then should see selected product in the cart
 When clicks Checkout should see checkout: your information form
 When submits personal data correctly by clicking Continue
 Then should see checkout overview page with selected product
-Then should see item prices are correct using price verification method
 When clicks Finish
 Then the order success screen is displayed
 
 
-Scenario: Update the cart
-Given the user is in checkout overview
+Scenario: Update cart and sort
+Given <UserType> is in checkout overview with item total cost
 When goes back to all products
+When sorts all products differently to actual state
 When adds another product
 When goes back to checkout overview
-Then the cart updates with additional product
-Then the items total price is right using price verification method
+Then the cart updates with additional product 
+Then the price updates with additional amount
+Then the prices is correctly formatted
 
-
-Scenario: Update cart and use sorting functionality on all users
 Given <UserType> is in checkout overview with products
 Then the amounts are right
 When goes back to all products
-When sorts all products differently to actual state
+
 When adds more products to cart
 When goes to back to checkout overview
 Then the amounts are still right after update
 
 
-Scenario: Adding a single product to cart from all products page on all users
+Scenario: Adding a single product to cart from all products
 Given <UserType> is on all products page
 When clicks add to cart button on a product
 Then the cart icon updates with correct number
@@ -81,13 +80,13 @@ When clicks add product to cart
 Then the product is added to cart
 
 
-Scenario: All items can be added to cart from all products page on all users
+Scenario: All items can be added to cart from all products page
 Given <UserType> is on all products page
 When clicks add to cart button for all products one by one
 Then all products are added to cart
 
 
-Scenario: Removing a product from cart on all users
+Scenario: Removing a product from cart on all products page
 Given <UserType> added a product to cart
 When goes to cart
 When removes the product
@@ -107,7 +106,6 @@ When clicks Back one by one
 Then always goes back to all products
 
 
-//for this one, verify the issue with 00.0000 - decimal places
 Scenario: Product price, tax and total is correct at checkout
 Given the user added a product
 When reaches checkout summary step
@@ -135,7 +133,7 @@ When checks for images on the products
 Then the images are correct
 
 
-Scenario: Sorting on all users
+Scenario: Sorting
 Given <UserType> is on all products page
 When he sorts name a to z
 Then items are sortec a to z
@@ -147,7 +145,7 @@ When sorts by price high to low
 Then items are sorted high to low
 
 
-Scenario: Button states are porsisted between pages
+Scenario: Button states are persisted between pages
 Given user is on all products page
 When adds to cart a product
 When clicks that product
@@ -156,7 +154,7 @@ When user goes back to all products page
 Then the button also has 'remove' state persisted
 
 
-4. Feature: Contacts
+4. Feature: Contacts (all users)
 
 Scenario: Social media buttons in footer
 Given the user is on home page
@@ -169,7 +167,7 @@ When clicks About
 Then is redirected to About section
 
 
-5. Feature: UI/UX
+5. Feature: UI/UX (all users)
 
 Background: in assertions check for hamburger menu, all products page, cart, sorting, single product, checkout steps, order complete screen
 

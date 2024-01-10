@@ -6,6 +6,7 @@ export class ProductPage {
   productDescription: Locator;
   productPrice: Locator;
   backBtn: Locator;
+  addToCartBtn: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -13,6 +14,7 @@ export class ProductPage {
     this.productDescription = page.locator(".inventory_details_desc");
     this.productPrice = page.locator(".inventory_details_price");
     this.backBtn = page.locator(".inventory_details_back_button");
+    this.addToCartBtn = page.locator(".btn_primary");
   }
 
   async grabTitle() {

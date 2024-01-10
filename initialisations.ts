@@ -5,6 +5,7 @@ import { CheckoutYourInformationPage } from "./pages/checkoutYourInformation.pag
 import { ProductsPage } from "./pages/products.page";
 import { CartPage } from "./pages/cart.page";
 import { ProductPage } from "./pages/product.page";
+import { HomePage } from "./pages/home.page";
 
 type pageObjectClass = {
   loginPage: LoginPage;
@@ -13,6 +14,7 @@ type pageObjectClass = {
   cartPage: CartPage;
   checkoutOverviewPage: CheckoutOverviewPage;
   productPage: ProductPage;
+  homePage: HomePage;
 };
 
 export const test = base.extend<pageObjectClass>({
@@ -38,5 +40,8 @@ export const test = base.extend<pageObjectClass>({
 
   checkoutOverviewPage: async ({ page }, use) => {
     await use(new CheckoutOverviewPage(page));
+  },
+  homePage: async ({ page }, use) => {
+    await use(new HomePage(page));
   },
 });
