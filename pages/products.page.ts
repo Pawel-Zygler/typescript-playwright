@@ -21,10 +21,6 @@ export class ProductsPage {
     this.productValue = page.locator(".inventory_item_price");
   }
 
-  async itemNameToLocatorName(itemName: string) {
-    return `[data-test=add-to-cart-${itemName.toLowerCase().replace(/[^a-z0-9]/g, "-")}]`;
-  }
-
   async sortAZ() {
     await this.page.selectOption(".product_sort_container", "az");
   }

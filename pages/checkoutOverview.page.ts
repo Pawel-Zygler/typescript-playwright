@@ -10,9 +10,7 @@ export class CheckoutOverviewPage {
     this.page = page;
     this.pageTitle = page.getByText("Checkout: Overview");
     this.finishBtn = page.locator('[data-test="finish"]');
-    this.orderSuccessMsg = page.getByRole("heading", {
-      name: "Thank you for your order!",
-    });
+    this.orderSuccessMsg = page.getByRole("heading");
   }
 }
 

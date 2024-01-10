@@ -1,9 +1,6 @@
 import { Page, Locator, expect } from "@playwright/test";
 
 export class LoginPage {
-  static loginUser(username: string, password: string) {
-    throw new Error("Method not implemented.");
-  }
   page: Page;
   username: Locator;
   password: Locator;

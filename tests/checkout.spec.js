@@ -38,5 +38,6 @@ test.describe("Checkout", () => {
     await expect(cartPage.products).toHaveText("Sauce Labs Backpack");
 
     await checkoutOverviewPage.finishBtn.click();
+    await expect(checkoutOverview.orderSuccessMsg).toHaveText("THANK YOU FOR YOUR ORDER");
   });
 });
