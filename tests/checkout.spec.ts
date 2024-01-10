@@ -1,21 +1,21 @@
 import { expect } from "@playwright/test";
 import { test } from "../initialisations";
-import testData from "../data/testData";
+import testData from "../data/testData.json";
 
 test.describe("Checkout", () => {
   test.beforeEach(async ({ loginPage }) => {
     await loginPage.visit();
 
     await loginPage.loginUser(
-      testData.userStandard.username,
-      testData.userStandard.password
+      testData.users.userStandard.username,
+      testData.users.userStandard.password
     );
   });
   test("@regression completes checkout", async ({
     productsPage,
     checkoutOverviewPage,
   }) => {
-    await productsPage.addProductToCheckout(testData.productOne.name);
+    await productsPage.addProductToCheckout(testData.products.productOne.name);
     await checkoutOverviewPage.finishBtn.click();
     await expect(checkoutOverviewPage.orderSuccessMsg).toHaveText(
       "Thank you for your order!"
@@ -25,22 +25,26 @@ test.describe("Checkout", () => {
   test.skip("asserts cart total, sorts az & za, adds to cart one more product, goes to checkout and asserts total", async ({
     productsPage,
     homePage,
+    checkoutOverviewPage,
   }) => {
-    await productsPage.addProductToCheckout(testData.productOne.name);
+    await productsPage.addProductToCheckout(testData.products.productOne.name);
 
-    //save price of checkout at start
-    const totalAtStart = await productsPage.getPrice();
-    await console.log(prices);
+    //pseudo code
+    // const actualItemPriceInCart = this.itemCost();
+    // const actualItemTotal = this.totalPrice();
+    // expect(actualItemPriceInCart).toEqual(actualItemTotal);
+
     await homePage.hamburgerMenu.click();
     await homePage.allItemsLink.click();
     await productsPage.sortAZ();
     await productsPage.sortZA();
     await productsPage.sortAZ();
-    await await productsPage.addProductToCheckout(testData.productTwo.name);
-    const totalAfterUpdate = productsPage;
-    expect(totalAfterUpdate).toNotBeLongerThan2DecimalPlaces();
+    await productsPage.addProductToCheckout(testData.products.productTwo.name);
 
-    //check prices from start
+    //const allPricesLoopedAfterUpdateAtFinish = [];
+    //for loop over all prices and save
+
+    // expect(actualItemTotalAtFinishAfteUpdate).toEqual(allPricesLooped);
   });
 });
 
