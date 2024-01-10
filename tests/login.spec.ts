@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../initialisations";
-import testData from "../data/testData";
+import testData from "../data/testData.json";
 
 test.describe("Login", () => {
   test.beforeEach(async ({ loginPage }) => {
@@ -13,8 +13,8 @@ test.describe("Login", () => {
 
   test("@smoke logs standard user in", async ({ loginPage }) => {
     await loginPage.fillInForm(
-      testData.userStandard.username,
-      testData.userStandard.password
+      testData.users.userStandard.username,
+      testData.users.userStandard.password
     );
 
     await expect(loginPage.productsLabel).toBeVisible();
@@ -23,8 +23,8 @@ test.describe("Login", () => {
 
   test("@smoke does not let log in", async ({ loginPage }) => {
     await loginPage.fillInForm(
-      testData.userLocked.username,
-      testData.userLocked.password
+      testData.users.userLocked.username,
+      testData.users.userLocked.password
     );
 
     await expect(loginPage.errorMessage).toBeVisible();
