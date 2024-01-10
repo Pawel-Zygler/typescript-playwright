@@ -12,26 +12,10 @@ test.describe("Browsing products", () => {
     );
   });
 
-  test.skip("checks if title, description, price is same on product and single product page", async ({
+  test("@regression checks if title, description, price is same on product and single product page", async ({
     productsPage,
-    productPage,
-    loginPage,
-    cartPage,
   }) => {
-    //clicks produkt
-    //use this in for
-    //await productsPage.clickProduct("Sauce Labs Backpack");
-    // const productTitles = await productsPage.products.allInnerTexts();
-    // for (let title of productTitles) {
-    //   productsPage.clickProduct(title);
-    //   let itemInfo = await productPage.grabInfo();
-    //   console.log(itemInfo);
-    // }
-    //go to products, get titles, desc and prices
-    //
-    //go to single products
-    //get title, desc and price
-    //assert the same content, length
+    await productsPage.compareAllProductInfo();
   });
 
   test("verifies az / za sorting sorting functionality", async ({ productsPage }) => {
@@ -51,11 +35,11 @@ test.describe("Browsing products", () => {
   }) => {
     await productsPage.sortPriceLoHi();
     const orderOfItems = await productsPage.products.allTextContents();
-    const pricesOfItems = await productsPage.productValue.allTextContents();
+    const pricesOfItems = await productsPage.itemCost.allTextContents();
     await productsPage.sortPriceHiLo();
     await productsPage.sortPriceLoHi();
     const currentOrderOfItmes = await productsPage.products.allTextContents();
-    const sortedPricesOfItems = await productsPage.productValue.allTextContents();
+    const sortedPricesOfItems = await productsPage.itemCost.allTextContents();
     await expect(orderOfItems).toEqual(currentOrderOfItmes);
 
     await expect(pricesOfItems).toEqual(sortedPricesOfItems);

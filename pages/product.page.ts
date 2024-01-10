@@ -5,30 +5,39 @@ export class ProductPage {
   productTitle: Locator;
   productDescription: Locator;
   productPrice: Locator;
+  backBtn: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.productTitle = page.locator(".inventory_details_name");
     this.productDescription = page.locator(".inventory_details_desc");
     this.productPrice = page.locator(".inventory_details_price");
+    this.backBtn = page.locator(".inventory_details_back_button");
   }
 
   async grabTitle() {
-    await this.productTitle.innerText();
+    return await this.productTitle.textContent();
   }
 
-  async grabDesc() {
-    await this.productDescription.innerText();
+  async grabDescription() {
+    return await this.productDescription.textContent();
   }
 
   async grabPrice() {
-    await this.productPrice.innerText();
+    return await this.productPrice.textContent();
   }
 
-  async grabInfo() {
-    this.grabTitle();
-    this.grabDesc();
-    this.grabPrice();
+  async grabAllProductsInfoFromSingleProductPage() {
+    const productTitles = await this.productTitle.allInnerTexts();
+    console.log(productTitles);
+    const productDescriptions = await this.productDescription.allInnerTexts();
+    console.log(productDescriptions);
+    const productPricesUnformatted = await this.productPrice.allTextContents();
+    console.log(productPricesUnformatted);
+  }
+
+  async clickBackToProducts() {
+    await this.backBtn.click();
   }
 }
 
