@@ -28,6 +28,7 @@ jobs:
         if: contains(github.event.head_commit.message, 'smokePlease')
         run: npm run test:smoke
       - name: Run Playwright tests
+        if: "!contains(github.event.head_commit.message, 'smokePlease') && !contains(github.event.head_commit.message, 'regressionPlease')"
         run: npm run test
       - uses: actions/upload-artifact@v3
         if: always()
