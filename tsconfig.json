@@ -12,6 +12,6 @@
       "*": ["node_modules/*", "types/*"]
     }
   },
-  "include": ["types/*"],
-  "exclude": ["node_modules"]
+  "include": ["./*"],
+  "exclude": ["node_modules/*"]
 }
