@@ -18,6 +18,9 @@ export class ProductsPage {
   backpack: Locator;
   productDescription: Locator;
   itemCost: Locator;
+  subtotalPrice: Locator; //fixture later or move to shared components page
+  tax: Locator; //fixture
+  totalPrice: Locator; //fixture
 
   constructor(page: Page) {
     this.page = page;
@@ -32,6 +35,9 @@ export class ProductsPage {
     this.cart = page.locator("#shopping_cart_container a");
     this.backpack = page.locator('[data-test="add-to-cart-sauce-labs-backpack"]');
     this.itemCost = page.locator(".inventory_item_price");
+    this.subtotalPrice = page.locator(".summary_subtotal_label"); //fixture later
+    this.tax = page.locator(".summary_tax_label"); //fixture this later
+    this.totalPrice = page.locator(".summary_total_label"); //fixture this later
   }
 
   async sortAZ() {
@@ -58,7 +64,7 @@ export class ProductsPage {
     }
   }
 
-  //not sure if this is still useful - to consider, leaving for now
+  //not sure if this is still useful - to consider
   // async compareAllTitles() {
   //   const productTitles = await this.products.allInnerTexts();
 
@@ -114,21 +120,41 @@ export class ProductsPage {
     }
   }
 
-  // for checkout summary
-  // async getPrice(): Promise<number> {
-  //   const productPricesUnformatted = await this.itemCost.allTextContents();
-  //   const itemPrices = productPricesUnformatted.map((item) => {
-  //     let pricesWithoutDollar = item.replace("$", "");
-  //     let pricewithoutDot = pricesWithoutDollar.replace(".", "");
-  //     return parseInt(pricewithoutDot);
-  //   });
+  async getAllProductsPrices(): Promise<number> {
+    const productPricesUnformatted = await this.itemCost.allTextContents();
+    const itemPrices = productPricesUnformatted.map((item) => {
+      let pricesWithoutDollar = item.replace("$", "");
+      let pricewithoutDot = pricesWithoutDollar.replace(".", "");
+      return parseInt(pricewithoutDot);
+    });
 
-  //   let result = 0;
-  //   for (let i = 0; i < itemPrices.length; i++) {
-  //     result = result + itemPrices[i];
-  //   }
-  //   return result;
-  // }
+    let result = 0;
+    for (let i = 0; i < itemPrices.length; i++) {
+      result = result + itemPrices[i];
+    }
+    return result;
+  }
+
+  async getSubtotalValue(): Promise<number> {
+    const subtotalUnformatted = await this.subtotalPrice.textContent();
+    let subtotalWithoutDollar = subtotalUnformatted.replace("Item total: $", "");
+    let subtotalWithoutDot = subtotalWithoutDollar.replace(".", "");
+    return parseInt(subtotalWithoutDot);
+  }
+
+  async getTaxValue(): Promise<number> {
+    const taxUnformatted = await this.tax.textContent();
+    let taxWithoutDollar = taxUnformatted.replace("Tax: $", "");
+    let taxWithoutDot = taxWithoutDollar.replace(".", "");
+    return parseInt(taxWithoutDot);
+  }
+
+  async getShopTOTAL(): Promise<number> {
+    const taxUnshopTotalUnformatted = await this.totalPrice.textContent();
+    let shopTotalWithoutDollar = taxUnshopTotalUnformatted.replace("Total: $", "");
+    let shopTotalWithoutDot = shopTotalWithoutDollar.replace(".", "");
+    return parseInt(shopTotalWithoutDot);
+  }
 
   async addProductToCheckout(product: string) {
     await this.clickProduct(product);

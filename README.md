@@ -13,4 +13,5 @@
 Tests are sheduled to run every night. With report at the end.
 
 How to launch regression or smoke test suite only?
+
 If commit message has 'regressionPlease' or 'smokePlease' then tests marked @regression or @smoke will run. Regular, full, suite will not run if one of those suites is launched in CI/CD by committing such msg "Patch for checkout and regressionPlease."
