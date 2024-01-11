@@ -22,38 +22,29 @@ test.describe("Checkout", () => {
     );
   });
 
-  test.skip("asserts cart total, sorts az & za, adds to cart one more product, goes to checkout and asserts total", async ({
+  test("@regression asserts shop counting is correct counting of prices", async ({
     productsPage,
     homePage,
-    checkoutOverviewPage,
   }) => {
     await productsPage.addProductToCheckout(testData.products.productOne.name);
-
-    //pseudo code
-    // const actualItemPriceInCart = this.itemCost();
-    // const actualItemTotal = this.totalPrice();
-    // expect(actualItemPriceInCart).toEqual(actualItemTotal);
+    const initialItemPricesInCart = await productsPage.getAllProductsPrices();
+    const initailSubtotalValue = await productsPage.getSubtotalValue();
+    await expect(initialItemPricesInCart).toEqual(initailSubtotalValue);
 
     await homePage.hamburgerMenu.click();
     await homePage.allItemsLink.click();
     await productsPage.sortAZ();
     await productsPage.sortZA();
     await productsPage.sortAZ();
+
     await productsPage.addProductToCheckout(testData.products.productTwo.name);
+    const finalItemPricesInCart = await productsPage.getAllProductsPrices();
+    const finalSubtotalValue = await productsPage.getSubtotalValue();
+    await expect(finalItemPricesInCart).toEqual(finalSubtotalValue);
 
-    //const allPricesLoopedAfterUpdateAtFinish = [];
-    //for loop over all prices and save
-
-    // expect(actualItemTotalAtFinishAfteUpdate).toEqual(allPricesLooped);
+    const finalTaxValue = await productsPage.getTaxValue();
+    const myTOTALcount = finalItemPricesInCart + finalTaxValue;
+    const shopTOTALcount = await productsPage.getShopTOTAL();
+    await expect(myTOTALcount).toEqual(shopTOTALcount);
   });
 });
-
-// Scenario: Update cart and sort
-// Given <UserType> is in checkout overview with item total cost
-// When goes back to all products
-// When sorts all products differently to actual state
-// When adds another product
-// When goes back to checkout overview
-// Then the cart updates with additional product
-// Then the price updates with additional amount
-// Then the prices is correctly formatted

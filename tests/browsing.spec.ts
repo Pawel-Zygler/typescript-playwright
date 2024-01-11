@@ -40,6 +40,7 @@ test.describe("Browsing products", () => {
     await productsPage.sortPriceLoHi();
     const currentOrderOfItmes = await productsPage.products.allTextContents();
     const sortedPricesOfItems = await productsPage.itemCost.allTextContents();
+
     await expect(orderOfItems).toEqual(currentOrderOfItmes);
 
     await expect(pricesOfItems).toEqual(sortedPricesOfItems);
