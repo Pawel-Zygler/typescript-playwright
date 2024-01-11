@@ -8,25 +8,20 @@ Define top 3 most important features:
 Define top 3 least important features:
 1. Footer and social media sharing
 2. About section in sidemenu
-3. Product descriptions
+3. Sorting products
 
 
 For Login and authentication:
-Automated testing: validate various users with different levels of access the login functionality.
+Automated testing: validate various users with different levels of access. Both login and logout should be automated. Manually test security.
 
 
 For Shopping Cart and Checkout:
-Functionality Testing: Automated scripts to test adding/removing items from All products page and from a single product page. Adding multiple items and removing them, verification of Add to cart button, remove from cart button on single product and all products pages. Back and cancel button can be checked manually.
-End-to-End Testing: Automate the complete checkout process so success screen is reached.
+Functionality Testing: Automated scripts to test adding/removing items from all products page and from a single product page. Adding multiple items and removing them, verification of add to cart button functionality, remove from cart button on single product and all products pages. Back and cancel button can be checked manually.
+
+e2e Testing: Automate the complete checkout process so success screen is reached. Also a scenario where user goes to update existing products in cart and goes back to checkout again. Validate price is correct for various combinations and assert correct formats, lengths.
 
 
 Product Browsing and Selection:
 UI/UX Testing: Ensure product listings are displayed correctly and are interactive.
 Visual Testing: Automated tests for loading of product images and product details. Also automate visual regression for buttons misplacements.
-
-
-Least Important Features:
-Footer and Social Media Sharing:
-About Section in Side Menu:
-Product Descriptions: Spot checks for content accuracy and formatting.
 
