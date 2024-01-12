@@ -9,11 +9,11 @@ on:
     - cron: "0 0 * * *"
   workflow_dispatch:
     inputs:
-      runRegressionTests?:
+      regressionPlease:
         description: "Run regression tests"
         required: false
         default: "false"
-      runSmokeTests?:
+      smokePlease:
         description: "Run smoke tests"
         required: false
         default: "false"
@@ -32,16 +32,15 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Regression Tests
-        if: contains(github.event.head_commit.message, 'regressionPlease') || github.event.inputs.regressionPlease == 'true'
+        if: github.event.inputs.regressionPlease == 'true'
         run: npm run test:regression
       - name: Run Smoke Tests
-        if: contains(github.event.head_commit.message, 'smokePlease') || github.event.inputs.smokePlease == 'true'
+        if: github.event.inputs.smokePlease == 'true'
         run: npm run test:smoke
       - name: Run Playwright tests
-        if: "!contains(github.event.head_commit.message, 'smokePlease') && !contains(github.event.head_commit.message, 'regressionPlease') && github.event.inputs.regressionPlease != 'true' && github.event.inputs.smokePlease != 'true'"
+        if: github.event.inputs.regressionPlease != 'true' && github.event.inputs.smokePlease != 'true'
         run: npm run test
       - uses: actions/upload-artifact@v3
-        if: always()
         with:
           name: playwright-report
           path: playwright-report/
