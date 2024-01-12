@@ -1,0 +1,3 @@
+PWA - just a few words about what to take into consideration
+
+I would consider features of PWA that are not usually met in automation like offline mode, push notifis andd updating. It would pose a serious challange for me :)

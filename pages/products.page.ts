@@ -64,42 +64,6 @@ export class ProductsPage {
     }
   }
 
-  //not sure if this is still useful - to consider
-  // async compareAllTitles() {
-  //   const productTitles = await this.products.allInnerTexts();
-
-  //   for (let i = 0; i < productTitles.length; i++) {
-  //     await this.clickProduct(productTitles[i]);
-  //     let singleProductTitle = await this.productPage.grabTitle();
-  //     expect(singleProductTitle).toEqual(productTitles[i]);
-  //     await this.productPage.clickBackToProducts();
-  //   }
-  //   return Boolean;
-  // }
-
-  // async compareAllDescriptions() {
-  //   const productTitles = await this.products.allInnerTexts();
-  //   const productDescriptions = await this.productDescription.allInnerTexts();
-
-  //   for (let i = 0; i < productDescriptions.length; i++) {
-  //     await this.clickProduct(productTitles[i]);
-  //     let singleProductDescription = await this.productPage.grabDescription();
-  //     expect(singleProductDescription).toEqual(productDescriptions[i]);
-  //     await this.productPage.clickBackToProducts();
-  //   }
-  // }
-
-  // async compareAllPrices() {
-  //   const productPrices = await this.itemCost.allInnerTexts();
-
-  //   for (let i = 0; i < productPrices.length; i++) {
-  //     await this.clickProduct(productPrices[i]);
-  //     let singleProductPrice = await this.productPage.grabPrice();
-  //     expect(singleProductPrice).toEqual(productPrices[i]);
-  //     await this.productPage.clickBackToProducts();
-  //   }
-  // }
-
   async compareAllProductInfo() {
     const productTitles = await this.products.allInnerTexts();
     const productDescriptions = await this.productDescription.allInnerTexts();
@@ -161,6 +125,7 @@ export class ProductsPage {
     await this.productPage.addToCartBtn.click();
     await this.cart.click();
     await this.cartPage.checkoutBtn.click();
+    //expect(this.checkoutYourInformationPage.firstName.isVisible());
     await this.checkoutYourInformationPage.fillInPersonalInfo(
       faker.person.firstName(),
       faker.person.lastName(),
