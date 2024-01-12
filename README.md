@@ -7,7 +7,7 @@
 3. `npm i` to install the dependencies
 4. `npx playwright install` to install browsers
 5. `npm run test` to execute tests
-6. `npm run test --ui` to execute tests with ui
+6. `npm run test:ui` to execute tests with ui
 
 ### CI/CD Integration
 
