@@ -2,7 +2,7 @@
 
 ### Setup:
 
-1. git clone https://github.com/Pawel-Zygler/cucumber-playwright.git
+1. git clone https://github.com/Pawel-Zygler/typescript-playwright
 2. go to root
 3. `npm i` to install the dependencies
 4. `npx playwright install` to install browsers
