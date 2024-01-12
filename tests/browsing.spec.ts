@@ -2,7 +2,7 @@ import { expect } from "@playwright/test";
 import { test } from "../initialisations";
 import testData from "../data/testData.json";
 
-test.describe("Browsing products", () => {
+test.describe("Browsing", () => {
   test.beforeEach(async ({ loginPage }) => {
     await loginPage.visit();
 
