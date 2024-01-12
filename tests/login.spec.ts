@@ -21,6 +21,17 @@ test.describe("Login", () => {
     await expect(loginPage.productsLabel).toHaveText("Products");
   });
 
+  test.only("@smoke logs standard user out", async ({ loginPage, homePage }) => {
+    await loginPage.fillInForm(
+      testData.users.userStandard.username,
+      testData.users.userStandard.password
+    );
+
+    await homePage.hamburgerMenu.click();
+    await homePage.logoutBtn.click();
+    await expect(loginPage.loginBtn).toBeVisible();
+  });
+
   test("@smoke does not let log in", async ({ loginPage }) => {
     await loginPage.fillInForm(
       testData.users.userLocked.username,
