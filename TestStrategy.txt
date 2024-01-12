@@ -1,27 +1,45 @@
 SUT: https://www.saucedemo.com
 
 Define top 3 most important features:
-1. Login and authentication
-2. Shopping Cart and Checkout
-3. Product browsing and selection
+1. Shopping Cart and Checkout
+2. Login and authentication
+3. Product Browsing and Selection
 
 Define top 3 least important features:
-1. Footer and social media sharing
+1. Footer and social media
 2. About section in sidemenu
 3. Sorting products
 
 
-For Login and authentication:
-Automated testing: validate various users with different levels of access. Both login and logout should be automated. Manually test security.
-
 
 For Shopping Cart and Checkout:
-Functionality Testing: Automated scripts to test adding/removing items from all products page and from a single product page. Adding multiple items and removing them, verification of add to cart button functionality, remove from cart button on single product and all products pages. Back and cancel button can be checked manually.
 
-e2e Testing: Automate the complete checkout process so success screen is reached. Also a scenario where user goes to update existing products in cart and goes back to checkout again. Validate price is correct for various combinations and assert correct formats, lengths.
+Functional Testing: Verify that all features, including the display of images, titles, prices of products, cart updates, and the checkout process, work as expected.
+Integration Testing: Ensure that system components, such as the product database and the order processing system, work seamlessly together.
+Performance Testing: Assess how the system performs under heavy load, such as many users simultaneously adding products to their shopping carts.
+Security Testing: Confirm that the purchasing process is secure, especially when handling payment data and user authentication.
+
+Depending on the project's needs, I will automate repetitive tasks, especially those crucial for regression. Scenarios that are less tedious or more complex, such as third-party integrations, will remain manual.
 
 
-Product Browsing and Selection:
-UI/UX Testing: Ensure product listings are displayed correctly and are interactive.
-Visual Testing: Automated tests for loading of product images and product details. Also automate visual regression for buttons misplacements.
 
+For Login Authentication and user data
+
+Login Correctness Testing: Ensure that the system properly allows access with valid credentials and denies access with invalid ones.
+Security Testing: Implement measures to ensure that authentication data are secure and not susceptible to common attacks such as SQL Injection and Cross-Site Scripting (XSS).
+Error Handling Testing: Test how the system behaves when incorrect login data is entered, including any account lockout mechanisms after multiple failed attempts.
+Password Recovery Testing: Verify the effectiveness and security of the password recovery process.
+Cross-environment Testing: Ensure that the login process functions correctly across different browsers and devices.
+
+Also, validate correctness/incorrectnes user data (first, last names and address) cannot make it to checkout to avoid incomplete orders. Can be easily automated usually.
+
+
+
+
+For Product Browsing and Selection:
+
+UI/UX Testing: Ensure that all user interface elements, such as product lists, are displayed correctly and are interactive.
+Visual Testing: Automate tests for loading product images and details, and use tools and techniques for visual regression testing, such as for misplacement of buttons.
+Responsiveness Testing: Confirm that the product page adjusts correctly to different screen sizes and devices.
+Browser Compatibility Testing: I will ensure that the product browsing and selection feature functions flawlessly across different web browsers.
+Filter and Search Testing: Test that the search and filter functions for products work correctly and return the expected results.

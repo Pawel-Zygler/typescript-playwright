@@ -6,14 +6,7 @@
   "scripts": {
     "test": "npx playwright test",
     "test:regression": "npx playwright test -g @regression",
-    "test:smoke": "npx playwright test -g @smoke",
-    "test worker": "npx playwright test --workers 3",
-    "to run specific test": "npx playwright test tests/logintwo.spec.js",
-    "to run specific two tests": "npx playwright test loginone.spec.js logintwo.spec.js",
-    "to run by name": "npx playwright test -g 'a standard user is on the login page'",
-    "to run chrome": "npx playwright test --project=chromium",
-    "to run headed": "npx playwright test --headed",
-    "to run debug": "npx playwright test --debug"
+    "test:smoke": "npx playwright test -g @smoke"
   },
   "keywords": [],
   "author": "",

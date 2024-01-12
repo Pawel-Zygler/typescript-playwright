@@ -15,6 +15,12 @@ Then the user is logged out to login page
 
 Background: error handling
 
+Scenario: Log in with incorrect upsername or password
+Given a user is on the login page
+When enters wrong password and good username
+Then the user is not logged in
+Then sees error "Epic sadface: Username and password do not match any user in this service"
+
 Scenario: Log in as locked_out_user
 Given a locked_out_user is on the login page
 When enters <password>
