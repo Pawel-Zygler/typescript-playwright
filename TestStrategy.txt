@@ -42,3 +42,12 @@ Visual Testing: Automate tests for loading product images and details, and use t
 Responsiveness Testing: Confirm that the product page adjusts correctly to different screen sizes and devices, especially for different countries and locales.
 Browser Compatibility Testing: Ensure that the product browsing and selection feature functions flawlessly across different web browsers.
 Sorting Testing: Test the filter functions for products work correctly and return the expected results.
+
+
+Different locale and transltions. I made one test that demostrates how to solve such problem with for loop iterating over users we'd like to verify locale against. I'd do same for let's say validation errors in different languages and would iterate over them with my tests instead of expecting something along like this:
+
+await expect(loginPage.errorMessage).toHaveText("Epic sadface: Sorry, this user has been locked out.");
+
+I think this will do for the website strategy of testing :).
+
+PS: Challanges were making some of the selectors work without grabbing text from it and typescript was also sometimes a pain! Beside that, I learnt a lot and had fun during this assignment.
