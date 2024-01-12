@@ -18,9 +18,9 @@ export class ProductsPage {
   backpack: Locator;
   productDescription: Locator;
   itemCost: Locator;
-  subtotalPrice: Locator; //fixture later or move to shared components page
-  tax: Locator; //fixture
-  totalPrice: Locator; //fixture
+  subtotalPrice: Locator;
+  tax: Locator;
+  totalPrice: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -35,9 +35,9 @@ export class ProductsPage {
     this.cart = page.locator("#shopping_cart_container a");
     this.backpack = page.locator('[data-test="add-to-cart-sauce-labs-backpack"]');
     this.itemCost = page.locator(".inventory_item_price");
-    this.subtotalPrice = page.locator(".summary_subtotal_label"); //fixture later
-    this.tax = page.locator(".summary_tax_label"); //fixture this later
-    this.totalPrice = page.locator(".summary_total_label"); //fixture this later
+    this.subtotalPrice = page.locator(".summary_subtotal_label");
+    this.tax = page.locator(".summary_tax_label");
+    this.totalPrice = page.locator(".summary_total_label");
   }
 
   async sortAZ() {
