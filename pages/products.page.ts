@@ -68,7 +68,6 @@ export class ProductsPage {
     const productTitles = await this.products.allInnerTexts();
     const productDescriptions = await this.productDescription.allInnerTexts();
     const productPrices = await this.itemCost.allInnerTexts();
-
     for (let i = 0; i < productTitles.length; i++) {
       await this.clickProduct(productTitles[i]);
 
@@ -125,7 +124,6 @@ export class ProductsPage {
     await this.productPage.addToCartBtn.click();
     await this.cart.click();
     await this.cartPage.checkoutBtn.click();
-    //expect(this.checkoutYourInformationPage.firstName.isVisible());
     await this.checkoutYourInformationPage.fillInPersonalInfo(
       faker.person.firstName(),
       faker.person.lastName(),
